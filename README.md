@@ -38,6 +38,11 @@ fixed frame length LiDAR odometry method and classical “correction-then-regist
 further verify the superiority and effectiveness of the proposed adaptive frame length LiDAR odometry.
 </p>
 
+## 🔗 Related Works
+<strong>Dataset:</strong>
+
+[<u>WHU-Helmet Dataset</u>](https://github.com/kafeiyin00/WHU-HelmetDataset): A helmet-based multi-sensor SLAM dataset for the evaluation of real-time 3D mapping in large-scale GNSS-denied environments
+
 ## 💻 Requirements
 The code has been tested on:
 - Ubuntu 18.04
@@ -94,7 +99,7 @@ Please consider citing AFLI-Calib if this program benefits your project
 }
 ```
 
-## 🔗 Related Projects
+## 🔗 Acknowledgments
 We sincerely thank the excellent projects:
 - [loam_livox](https://github.com/hku-mars/loam_livox) for inspiring the idea of the adaptive frame length
 - [ikd-Tree](https://github.com/hku-mars/ikd-Tree) for point cloud map management;
