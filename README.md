@@ -9,7 +9,7 @@ This is the official implementation (refactor version based on the experiment co
 ## 🔭 Introduction
 
 <p align="center">
-<img src="pic/overview.png" alt="Network" style="zoom:100%;">
+  <img src="pic/overview.png" alt="Network" width="80%">
 </p>
 <p align="justify">
 <strong>Abstract:</strong> As an effective complement to common laser scanning systems, the portable laser scanning system can acquire
@@ -21,12 +21,12 @@ challenging, due to the large distortion in single-frame point cloud caused by r
 errors of IMU integration which drift quickly. At the same time, the highly dynamic motion patterns of portable
 devices and the changes in the scanned scene structure are not well considered in existing LiDAR odometry
 methods. To take better advantage of the characteristics of non-repetitive scanning LiDAR sensor, this paper
-proposes AFLI-Calib, which utilizes adaptive frame length LiDAR odometry to perform the extrinsic selfcalibration
+proposes AFLI-Calib, which utilizes adaptive frame length LiDAR odometry to perform the extrinsic self-calibration
 of LiDAR-IMU. <strong>Unlike LiDAR odometry methods with a fixed frame length, the LiDAR frame
-length is dynamically adjusted according to the motion state of sensors and the matching stability of scenes.</strong>The
+length is dynamically adjusted according to the motion state of sensors and the matching stability of scenes. </strong>The
 single-frame point cloud is registered to the map through a linear-based continuous-time model, eliminating the
 motion distortion correction in advance. For further optimization of trajectory and extrinsic parameters, IMU raw
-measurements and LiDAR observations are involved in the multi-constraint optimization, through tightlycoupled
+measurements and LiDAR observations are involved in the multi-constraint optimization, through tightly-coupled
 IMU pre-integration constraints, LiDAR point-to-plane constraints, and prior constraints. The method
 is fully validated using self-collected calibration data of indoor and outdoor scenes and different motion modes.
 Experiments show that on the test data, the translation parameter accuracy of the method is 0.041 m, which is
