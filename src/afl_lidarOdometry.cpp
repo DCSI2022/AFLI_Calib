@@ -26,6 +26,8 @@
 #include <omp.h>
 #include <pcl/io/pcd_io.h>
 #include <ros/ros.h>
+#include <sensor_msgs/PointCloud2.h>
+#include <pcl_conversions/pcl_conversions.h>
 
 using namespace std;
 
@@ -41,6 +43,8 @@ int main(int argc, char **argv) {
     cout << "Let's start!" << endl;
     ros::init(argc, argv, "afl_lidarOdometry_node");
     ros::NodeHandle nh;
+
+    ros::Publisher pub = nh.advertise<sensor_msgs::PointCloud2>("/tranformed_cloud", 10);
 
     double start_time = omp_get_wtime();
 
@@ -408,6 +412,12 @@ int main(int argc, char **argv) {
             vec_frame_transformed.push_back(frame_transformed);
             auto add_point_size = ikdtree.Add_Points(frame_transformed1->points, true);
             //cout << "kdtree add point size: " << add_point_size << endl;
+
+            //publish transformed point cloud
+            sensor_msgs::PointCloud2 output_msg;
+            pcl::toROSMsg(*frame_transformed, output_msg);
+            output_msg.header.frame_id = "map";
+            pub.publish(output_msg);
 
             //Update frame start time
             adaptive_frame_time += frame_length;

@@ -61,26 +61,47 @@ catkin_make
 ```
 Need solve the dependency before catkin_make, or use Docker
 
-### Docker (Recommended)
+#### Docker (Recommended)
 
 ```
+# in local
 docker build -t $image_name:tag . #build custom name and tag from Dockerfile
-docker run -it -v ~/catkin_ws/src/AFLI_Calib:/home/catkin_ws/src/AFLI_Calib --network host $image_name:tag
-cd /home/catkin_ws # in container
-catkin_make # in container 
+docker run -it -v ~/catkin_ws/src/AFLI_Calib:/home/catkin_ws/src/AFLI_Calib -v /path_to_Data:/home/Data --network host -u root $image_name:tag
+# in container 
+cd /home/catkin_ws 
+catkin_make 
+source devel/setup.bash
 ```
 
-### RUN AFLO
+### 2. RUN AFLO
+Paramter description is provided in [Parameter_Descrip](./Parameter_Descrip.md). Check it!
+
+In local
+  ```
+  roscore
+  rviz -d ~/catkin_ws/src/AFLI_Calib/aflo_config.rviz
+  ```
+In container
   ```
   rosrun afli_calib afl_lidarOdometry $rosbag_path $lidar_type $lidar_topic $match_stability_threshold $motion_linearity_threshold $rosbag_start $rosbag_end
-  ```
   
-lidar_type: 1 LIVOX 2 VELODYNE 3 OUSTER 4 HESAI
+  ```
+  we provide [test data](https://drive.google.com/file/d/1U0ycgMENDFWMKsURsyX6R29PVqw6CTrN/view?usp=drive_link), you can download it and test it with the command below!
+  ```
+  rosrun afli_calib afl_lidarOdometry $path_to_test_bag 1 /livox/lidar 30 0.1 0 50
+  ```
 
-### RUN LiDAR-IMU extrinsic calibration
+### 3. RUN LiDAR-IMU extrinsic calibration
   ```
   rosrun afli_calib tight_licalib $rosbag_path $lo_path $lidar_type $lidar_topic $rosbag_start $rosbag_end %still_time
   ```
+
+  for the calib_test.bag
+  ```
+  rosrun afli_calib tight_licalib $path_to_test_bag $LOG_LO_XX/pose.txt 1 /livox 0 50 10
+  ```
+
+  You can check the optimized extrinsic parameters in the LOG_calib_xx/estimated_extrinsic.txt
 ## Todo
 - [ ] Modify parameters using yaml file
 
